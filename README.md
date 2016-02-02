@@ -9,7 +9,10 @@ variable requirements of producing the result.
 
 Some of the websites that reference to these algorithms are:
 
+
 www.coderbyte.com (They have since switched to a subscription model)
+
 www.w3schools.com (The JS challenges page)
-And more to come! If you're curious to know more, look [here](https://programmers.stackexchange.com/questions/756/where-can-i-find-programming-puzzles-and-challenges "Stackoverflow").
+
+And more to come! If you're curious to learn more, look [here](https://programmers.stackexchange.com/questions/756/where-can-i-find-programming-puzzles-and-challenges "Stackoverflow").
 
