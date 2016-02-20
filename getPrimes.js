@@ -2,7 +2,7 @@ var prime = (function(){
 	
 	var getPrimes = function(n) {
 		var result = [],
-		    bool = true;
+		    bool;
     if (n === 1) {
       throw "1 is not a prime number."
     } else {
