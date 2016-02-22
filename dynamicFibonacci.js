@@ -18,9 +18,9 @@
 * 3. Guessing (Occurrence in other DP algorithms.)
 *
 * Test cases:
-* // Requires 17 recursive calls to itself:
-* fibonacci.normal(10);
 * // Requires 109 recursive calls to itself:
+* fibonacci.normal(10);
+* // Requires 17 recursive calls to itself:
 * fibonacci.memoized(10);
 */
 
