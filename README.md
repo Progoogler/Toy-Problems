@@ -12,6 +12,8 @@ Some of the websites that reference to these algorithms are:
 
 www.coderbyte.com (They have since switched to a subscription model)
 
+www.projecteuler.net/archives (A math playground for programmers)
+
 www.w3schools.com (The JS challenges page)
 
 And more to come! If you're curious to learn more, look [here](https://programmers.stackexchange.com/questions/756/where-can-i-find-programming-puzzles-and-challenges "Stackoverflow").
