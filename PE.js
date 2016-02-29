@@ -26,8 +26,7 @@
 * 
 * The product of these numbers is 26 × 63 × 78 × 14 = 1788696.
 * 
-* What is the greatest product of four adjacent numbers in the same direction 
-* (up, down, left, right, or diagonally) in the 20×20 grid?
+* What is the greatest product of four adjacent numbers in the same direction (up, down, left, right, or diagonally) in the 20×20 grid?
 */
 
 var grid = [
@@ -59,10 +58,11 @@ var gridProducts = function(grid) {
       maxDown = 0,
       maxLeft = 0,
       maxRight = 0,
-      maxCross = 0;
+      maxCross = 0,
+      maxProducts = [];
 
   for (let i = 0, l = grid.length; i < l; i++) {
-    for (let j = 0, row = grid[i].length; j< row; j++) {
+    for (let j = 0, row = grid[i].length; j < row; j++) {
       if (j < row - 3) {
         let temp = grid[i][j] * grid[i][j+1] * grid[i][j+2] * grid[i][j+3];
         if (maxRight < temp) maxRight = temp;
@@ -89,8 +89,13 @@ var gridProducts = function(grid) {
       }
     }
   }
-  console.log("Diagonal: ", maxCross, "Right: ", maxRight, "Left: ", maxLeft, "Up: ", maxUp, "Down: ", maxDown);
-  // Should be 'maxRightLeft' and 'maxUpDown', they return the same true max products for both opposite directions.
+  maxProducts.push(maxCross);
+  maxProducts.push(maxUp);
+  maxProducts.push(maxDown);
+  maxProducts.push(maxRight);
+  maxProducts.push(maxLeft);
+  maxProducts.sort((a,b) => a - b);
+  return maxProducts[4];
 };
 
 /*******************************************************************************************************************/
