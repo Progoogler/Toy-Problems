@@ -1,4 +1,4 @@
-/*******************************************************************************************************************/
+/*****************************************************************************************************************************/
 
 /*
 * In the 20×20 grid below, four numbers along a diagonal line have been marked in red.
@@ -26,7 +26,8 @@
 * 
 * The product of these numbers is 26 × 63 × 78 × 14 = 1788696.
 * 
-* What is the greatest product of four adjacent numbers in the same direction (up, down, left, right, or diagonally) in the 20×20 grid?
+* What is the greatest product of four adjacent numbers in the same direction 
+* (up, down, left, right, or diagonally) in the 20×20 grid?
 */
 
 var grid = [
@@ -54,14 +55,15 @@ var grid = [
 
 var gridProducts = function(grid) {
   "use strict";
-  let maxUp = 0,
+  let column = grid.length,
+      maxUp = 0,
       maxDown = 0,
       maxLeft = 0,
       maxRight = 0,
       maxCross = 0,
       maxProducts = [];
 
-  for (let i = 0, l = grid.length; i < l; i++) {
+  for (let i = 0; i < column; i++) {
     for (let j = 0, row = grid[i].length; j < row; j++) {
       if (j < row - 3) {
         let temp = grid[i][j] * grid[i][j+1] * grid[i][j+2] * grid[i][j+3];
@@ -75,15 +77,15 @@ var gridProducts = function(grid) {
         let temp = grid[i][j] * grid[i-1][j] * grid[i-2][j] * grid[i-3][j];
         if (maxUp < temp) maxUp = temp;
       }
-      if (i < grid.length - 3) {
+      if (i < column - 3) {
         let temp = grid[i][j] * grid[i+1][j] * grid[i+2][j] * grid[i+3][j];
         if (maxDown < temp) maxDown = temp;
       }
-      if (j < row - 3 && i < grid.length - 3) {
+      if (j < row - 3 && i < column - 3) {
         let temp = grid[i][j] * grid[i+1][j+1] * grid[i+2][j+2] * grid[i+3][j+3];
         if (maxCross < temp) maxCross = temp;
       }
-      if (j > 2 && i < grid.length - 3) {
+      if (j > 2 && i < column - 3) {
         let temp = grid[i][j] * grid[i+1][j-1] * grid[i+2][j-2] * grid[i+3][j-3];
         if (maxCross < temp) maxCross = temp;
       }
@@ -98,7 +100,7 @@ var gridProducts = function(grid) {
   return maxProducts[4];
 };
 
-/*******************************************************************************************************************/
+/*****************************************************************************************************************************/
 
 /*
 * The four adjacent digits in the 1000-digit number that have the 
@@ -174,4 +176,36 @@ var adjacentProducts = n => {
   return max; 
 };
 
-/*******************************************************************************************************************/
+/*****************************************************************************************************************************/
+
+/*
+* The prime factors of 13195 are 5, 7, 13 and 29.
+* 
+* What is the largest prime factor of the number 600851475143 ?
+*/
+
+var primeFactor = function(n) {
+  "use strict";
+  let bools = [],
+      limit = Math.sqrt(n);
+
+  for (let i = 2; i < limit; i++) bools.push(true);
+
+  for (let i = 2; i < limit; i++) {
+    if (bools[i] === true) {
+      bools[i*i] = false;
+      let x = 1;
+      while (x < limit) {
+        let j = i * i + x * i;
+        bools[j] = false;
+        x++;
+      }
+    }
+  }
+  for (let i = bools.length-1; i >= 0; i--) {
+    if (bools[i] === true && n % i === 0) return i;
+  }
+};
+
+/*****************************************************************************************************************************/
+
