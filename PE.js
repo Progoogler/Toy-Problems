@@ -1,3 +1,57 @@
+/*
+* 2^15 = 32768 and the sum of its digits is 3 + 2 + 7 + 6 + 8 = 26.
+* 
+* What is the sum of the digits of the number 2^1000?
+*/
+
+var powerDigitSum = function(base, power) {
+  "use strict";
+  let n = 1,
+      store = "1",
+      carry = "";
+
+  while (n <= power) {
+    let newStore = "",
+        carry = "";
+    for (let i = store.length-1; i >= 0; i--) {
+      // "carry" cases:
+      if (carry.length > 0 && store[i] === "0") {
+        newStore = carry + newStore;
+      } else if (carry.length > 0 && i !== 0) {
+        let temp = base * parseInt(store[i]) + parseInt(carry) + "";
+        newStore = temp[temp.length-1] + newStore;
+        temp.length > 1 ? carry = temp[0] : carry = ""; 
+      } else if (carry.length > 0 && i === 0) {
+        newStore = base * parseInt(store[i]) + parseInt(carry) + newStore;
+      } else {
+        // no "carry" cases:
+        if (i > 0) {
+          let temp = base * parseInt(store[i]) + "";
+          if (temp.length < 2 && temp !== "0") {
+            newStore = temp + newStore;
+          } else if (temp === "0") {
+            newStore = 0 + newStore;
+          } else if (temp.length > 1 && temp !== "0") {
+            carry = temp[0];
+            newStore = temp[1] + newStore;
+          }
+        } else if (store[i] === "0") {
+          newStore = 0 + newStore;
+        } else {
+          newStore = base * parseInt(store[i]) + newStore;
+        }
+      }
+    }
+    store = newStore;
+    n++;
+  }
+  let sum = 0;
+  for (let i = 0; i < store.length; i++) {
+    sum += parseInt(store[i]);
+  }
+  return sum;
+};
+
 /*****************************************************************************************************************************/
 
 /*
