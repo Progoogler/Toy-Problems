@@ -392,3 +392,110 @@ var primeFactor = function(n) {
 
 /*****************************************************************************************************************************/
 
+/*
+* If the numbers 1 to 5 are written out in words: one, two, three, four, five, 
+* then there are 3 + 3 + 5 + 4 + 4 = 19 letters used in total.
+* 
+* If all the numbers from 1 to 1000 (one thousand) inclusive were written out in words, 
+* how many letters would be used?
+* 
+* 
+* NOTE: Do not count spaces or hyphens. For example, 342 (three hundred and forty-two) 
+* contains 23 letters and 115 (one hundred and fifteen) contains 20 letters. 
+* The use of "and" when writing out numbers is in compliance with British usage.
+*/
+
+var letterCount = function(integer) {
+  "use strict";
+  let numbers = {
+    "00": "",
+    0: "",
+    1: "one",
+    2: "two",
+    3: "three",
+    4: "four",
+    5: "five",
+    6: "six",
+    7: "seven",
+    8: "eight",
+    9: "nine",
+    10: "ten",
+    11: "eleven",
+    12: "twelve",
+    13: "thirteen",
+    14: "fourteen",
+    15: "fifteen",
+    16: "sixteen",
+    17: 'seventeen',
+    18: "eighteen",
+    19: "nineteen",
+    20: "twenty",
+    30: "thirty",
+    40: "forty",
+    50: "fifty",
+    60: "sixty",
+    70: "seventy",
+    80: "eighty",
+    90: "ninety",
+    100: "hundred",
+    1000: "thousand",
+    "and": "and"
+  },
+    words = "",
+    count = 0,
+    arr = [];
+
+  for (let i = 1; i <= integer; i++) arr.push(i + "");
+
+  for (let i = 0; i < arr.length; i++) {
+    if (i <= 20) {
+      words += numbers[arr[i]];
+    } else {
+      if (arr[i].length < 3) {
+        for (let j = 0; j < arr[i].length; j++) {
+          j === 0 ? words += numbers[arr[i][j] + "0"] : words += numbers[arr[i][j]];
+        }
+      } else if (arr[i].length < 4) {
+        for (let j = 0; j < arr[i].length; j++) {
+          if (j === 0 && arr[i][j+1] === "0" && arr[i][j+2] === "0") {
+            words += numbers[arr[i][j]] + numbers[100];
+          } else if (j === 0) {
+            words += numbers[arr[i][j]] + numbers[100] + numbers["and"];
+          } else {
+            if (j === 1 && arr[i][j] === "1") {
+              words += numbers[arr[i][j] + arr[i][j+1]];
+              if (parseInt(arr[i][j+1]) <= 9) j++;
+            } else if (j === 1) {
+              words += numbers[arr[i][j] + "0"];
+            } else {
+              words += numbers[arr[i][j]];
+            }
+          }
+        }
+      } else if (arr[i].length < 5) {
+        for (let j = 0; j < arr[i].length; j++) {
+          if (j === 0) {
+            words += numbers[arr[i][j]] + numbers[1000];
+          } else if (j === 1 && arr[i][j] !== "0" && arr[i][j+1] !== "0") {
+            words += numbers[arr[i][j]] + numbers[100] + numbers["and"];
+          } else if (j === 1 && arr[i][j] !== "0") {
+            words += numbers[arr[i][j]] + numbers[100];
+          } else {
+            if (j === 2 && arr[i][j] === "1") {
+              words += numbers[arr[i][j] + arr[i][j+1]];
+              if (parseInt(arr[i][j+1]) <= 9) j++;
+            } else if (j === 2) {
+              words += numbers[arr[i][j] + "0"];
+            } else {
+              words += numbers[arr[i][j]];
+            }
+          }
+        }
+      }
+    }
+  }
+  for (let c = 0; c < words.length; c++) {
+    count++;
+  }
+  return count;
+};
