@@ -499,3 +499,62 @@ var letterCount = function(integer) {
   }
   return count;
 };
+
+/*****************************************************************************************************************************/
+
+/*
+* Let d(n) be defined as the sum of proper divisors of n 
+* (numbers less than n which divide evenly into n).
+* 
+* If d(a) = b and d(b) = a, where a ≠ b, then a and b are an 
+* amicable pair and each of a and b are called amicable numbers.
+* 
+* For example, the proper divisors of 220 are 1, 2, 4, 5, 10, 11, 20, 22, 44, 55 and 110; 
+* therefore d(220) = 284. The proper divisors of 284 are 1, 2, 4, 71 and 142; 
+* so d(284) = 220.
+* 
+* Evaluate the sum of all the amicable numbers under 10000.
+*/
+
+var amicableSum = function(integer) {
+  "use strict";
+  let memo = [];
+
+  let amicablePair = function(integer) {
+    let intSum = 0,
+        pairSum = 0,
+        limit;
+
+    integer % 2 === 0 ? limit = integer / 2 : limit = Math.ceil(integer / 3);
+
+    for (let i = 1; i <= limit; i++) {
+      if (integer / i % 1 === 0) intSum += i;
+    }
+
+    intSum % 2 === 0 ? limit = intSum / 2 : limit = Math.ceil(intSum / 3);
+    
+    for (let i = 1; i <= limit; i++) {
+      if (intSum / i % 1 === 0) pairSum += i;
+    }
+
+    if (pairSum === integer && intSum !== integer) {
+      memo[intSum] = true;
+      memo[integer] = true; 
+    }
+  };
+
+  let result = 0;
+  while (integer > 1) {
+    if (memo[integer] === true) {
+      result += integer;
+      integer--;
+    } else {
+      amicablePair(integer);
+      if (memo[integer] === true) result += integer;
+      integer--;
+    }
+  }
+
+  return result;
+};
+
