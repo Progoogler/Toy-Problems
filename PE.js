@@ -558,3 +558,43 @@ var amicableSum = function(integer) {
   return result;
 };
 
+/*****************************************************************************************************************************/
+
+/*
+* n! means n × (n − 1) × ... × 3 × 2 × 1
+* 
+* For example, 10! = 10 × 9 × ... × 3 × 2 × 1 = 3628800,
+* and the sum of the digits in the number 10! is 3 + 6 + 2 + 8 + 8 + 0 + 0 = 27.
+* 
+* Find the sum of the digits in the number 100!
+*/
+
+"use strict";
+// Use 'Big Integer' library; can be found on GitHub.
+let bigInt = require("./big-integer/BigInteger.js");
+
+let factorial = function(integer) {
+  let memo = [0,1];
+  let compute = function(integer) {
+    let fact;
+    if (memo[integer]) {
+      return memo[integer];
+    } else if (integer < 2) {
+      return 1;
+    } else {
+      fact = bigInt(integer).multiply(compute(integer - 1));
+      memo[integer] = fact;
+      return fact;
+    }
+  };
+  return compute(integer);
+};
+let hundred = factorial(100);
+let sumDigits = 0;
+for (let i = 0; i < hundred.value.length; i++) {
+  let temp = hundred.value[i] += "";
+  for (let j = 0; j < temp.length; j++) {
+    sumDigits += parseInt(temp[j]);    
+  }
+}
+console.log("sum: ", sumDigits);
