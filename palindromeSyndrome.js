@@ -49,7 +49,7 @@ const palindrome = function(string) {
       single,
       charArr = [];
   // String with an odd frequency character:
-  if (string.length % 2 === 1) { console.log(char)
+  if (string.length % 2 === 1) {
   	for (var ch in char) {
   		if (char[ch] % 2 === 0) {
   			charArr.push(ch);
@@ -112,7 +112,7 @@ const palindrome = function(string) {
           result[z].push(charArr[i]);
           rev.push(charArr[i]);
         }
-        result[z] = result[z].concat(rev.reverse()).join(""); console.log(result[z], rev)
+        result[z] = result[z].concat(rev.reverse()).join("");
         let temp = charArr.pop();
         charArr.unshift(temp);        
         z++;
