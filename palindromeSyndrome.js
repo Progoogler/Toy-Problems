@@ -45,11 +45,11 @@ const palindrome = function(string) {
   	}
   }
 
-  let check = 0,
-      single,
+  let single,
       charArr = [];
   // String with an odd frequency character:
   if (string.length % 2 === 1) {
+    let check = 0;
   	for (var ch in char) {
   		if (char[ch] % 2 === 0) {
   			charArr.push(ch);
@@ -127,4 +127,4 @@ const palindrome = function(string) {
   return result;
 };
 
-palindrome("aabbcadad")
+palindrome("aabbcadad");
