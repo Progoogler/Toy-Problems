@@ -83,7 +83,7 @@ const palindrome = function(string) {
 	      	y++;
 	      }
         charArr.splice(x,0,charArr[charArr.length-1]);
-        charArr.pop(); console.log(charArr)
+        charArr.pop();
         x++;
       }
   	}
@@ -119,7 +119,7 @@ const palindrome = function(string) {
         y++;
       }
       charArr.splice(x,0,charArr[charArr.length-1]);
-      charArr.pop(); console.log(charArr)
+      charArr.pop();
       x++;
     }
   }
