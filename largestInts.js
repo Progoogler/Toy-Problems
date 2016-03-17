@@ -16,11 +16,8 @@ const largestInts = (array) => {
       if (array[i][j] > temp) {
         temp = array[i][j];
       }
-
-      if (j === len - 1) {
-        maxValues.push(temp);
-      }
     }
+    maxValues.push(temp);
   }
 
   return maxValues;
