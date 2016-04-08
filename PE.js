@@ -393,6 +393,64 @@ var primeFactor = function(n) {
 /*****************************************************************************************************************************/
 
 /*
+* Surprisingly there are only three numbers that can be written as 
+* the sum of fourth powers of their digits:
+* 
+* 1634 = 1^4 + 6^4 + 3^4 + 4^4
+* 8208 = 8^4 + 2^4 + 0^4 + 8^4
+* 9474 = 9^4 + 4^4 + 7^4 + 4^4
+* As 1 = 14 is not a sum it is not included.
+* 
+* The sum of these numbers is 1634 + 8208 + 9474 = 19316.
+* 
+* Find the sum of all the numbers that can be written as the sum of 
+* fifth powers of their digits.
+*/
+
+
+const sumDigitPower = power => {
+  "use strict";
+  let powers = [],
+      result = 0,
+      range = "1",
+      limit = "9";
+
+  for (let i = 0; i <= 9; i++) {
+    powers.push(Math.pow(i, power));
+  }
+
+  while (power > 1) {
+    limit += 9;
+    range += 0;
+    power--;
+  }
+
+  while (range !== limit) {
+    let sum = 0;
+    for (let i = 0; i < range.length; i++) {
+      sum += powers[parseInt(range[i])];
+    }
+    let str = sum + "",
+        bool = true;
+    for (let j = 0; j < range.length; j++) {
+      if (range[j] !== str[j]) {
+        bool = false;
+        break;
+      }
+    }
+    if (bool === true) {
+      result += sum;
+      console.log(sum)
+    }
+    range = parseInt(range) + 1 + ""; 
+  }
+
+  return result;
+};
+
+/*****************************************************************************************************************************/
+
+/*
 * If the numbers 1 to 5 are written out in words: one, two, three, four, five, 
 * then there are 3 + 3 + 5 + 4 + 4 = 19 letters used in total.
 * 
